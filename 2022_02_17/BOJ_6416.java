@@ -24,8 +24,8 @@ public class BOJ_6416 {
             list.add(new int[] {u, v});
 
             // hashmap으로 각 노드 정보 저장
-            check.put(u, check.getOrDefault(u, 0));
-            check.put(v, check.getOrDefault(v, 0) + 1);
+            check.put(u, 0);
+            check.put(v, 0);
 
             // 두 개의 0 입력될 경우 트리 분석
             if(u == 0 && v == 0){
