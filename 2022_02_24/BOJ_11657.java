@@ -58,8 +58,9 @@ public class BOJ_11657 {
     public static boolean bellmanFord(){
         dist[1] = 0;
 
-        // 경로의 길이는 N-1이므로, 그 이상이 된다면 싸이클 발생
+        // N-1번 반복
         for(int i=0; i<N-1; i++){
+            // 전체 간선 확인
             for(int j=0; j<M; j++){
                 if(dist[node.get(j).from] == INF){
                     continue;
@@ -71,7 +72,7 @@ public class BOJ_11657 {
             }
         }
 
-        // 음의 사이클 체크
+        // 한번 더 반복하여 음의 사이클 체크
         for(int i=0; i<M; i++){
             if(dist[node.get(i).from] != INF && dist[node.get(i).to] > dist[node.get(i).from] + node.get(i).weight){
                 System.out.println(-1);
