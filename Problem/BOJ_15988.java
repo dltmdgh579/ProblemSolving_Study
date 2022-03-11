@@ -9,7 +9,7 @@ public class BOJ_15988 {
 
         for(int tc=0; tc<T; tc++){
             int n = Integer.parseInt(br.readLine());
-            long[] dp = new long[n+1];
+            long[] dp = new long[1000001];
             dp[1] = 1;
             dp[2] = 2;
             dp[3] = 4;
