@@ -23,7 +23,7 @@ public class BOJ_15650 {
         combination(0, 0);
     }
 
-    // 순열
+    // 조합
     public static void combination(int cnt, int start){
         // M개 만큼 선택된 경우 출력
         if(cnt == M){
