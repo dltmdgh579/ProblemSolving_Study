@@ -50,7 +50,7 @@ public class SW_3124 {
 			for(Edge e : edgeList) {
 				if(union(e.from, e.to)) {
 					result += e.weight;
-					if(++cnt == E-1) break;
+					if(++cnt == V-1) break;
 				}
 			}
 			System.out.println("#" + tc + " " + result);
