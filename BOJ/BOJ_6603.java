@@ -14,7 +14,7 @@ public class BOJ_6603 {
 		while(true){
 			StringTokenizer st = new StringTokenizer(br.readLine());
 
-			k = Integer.parseInt(st.nextToken());
+			k = Integer.parseInt(st.nextToken()); 
 
 			if(k == 0) break;
 
