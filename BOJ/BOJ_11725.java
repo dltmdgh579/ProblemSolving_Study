@@ -34,7 +34,7 @@ public class BOJ_11725{
         for(int i=2; i<=N; i++){
             System.out.println(parents[i]);
         }
-    }
+    } 
 
     public static void bfs(){
         Queue<Integer> q = new LinkedList<>();
