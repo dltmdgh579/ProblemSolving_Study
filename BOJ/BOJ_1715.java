@@ -13,7 +13,7 @@ public class BOJ_1715 {
 
         for(int i=0; i<N; i++){
             pq.add(Integer.parseInt(br.readLine()));
-        }
+        } 
 
         int sum = 0;
         while(pq.size() > 1){
