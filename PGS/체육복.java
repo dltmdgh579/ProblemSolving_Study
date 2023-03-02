@@ -9,7 +9,7 @@ class Solution {
         
         for(int i=0; i<lost.length; i++){
             students[lost[i]]--;
-        }
+        } 
         
         for(int i=0; i<reserve.length; i++){
             students[reserve[i]]++;
