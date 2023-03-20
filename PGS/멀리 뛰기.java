@@ -12,7 +12,7 @@ class Solution {
             dp[i] = dp[i-1]%1234567 + dp[i-2]%1234567;
         }
         
-        answer = dp[n]%1234567;
+        answer = dp[n]%1234567; 
         return answer;
     }
 }
