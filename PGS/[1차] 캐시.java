@@ -12,7 +12,7 @@ class Solution {
         
         LinkedList<String> cache = new LinkedList<>();
         
-        for(int i=0; i<cities.length; i++){
+        for(int i=0; i<cities.length; i++){ 
             String city = cities[i].toUpperCase();
             
             if(cache.remove(city)){
