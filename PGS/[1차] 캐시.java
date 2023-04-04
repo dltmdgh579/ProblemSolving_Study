@@ -19,7 +19,7 @@ class Solution {
                 cache.addFirst(city);
                 answer += CACHE_HIT;
             } else {
-                if(cache.size() == cacheSize){
+                if(cache.size() == cacheSize){ 
                     cache.pollLast();
                 }
                 
