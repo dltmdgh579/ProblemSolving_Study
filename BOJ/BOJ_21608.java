@@ -2,22 +2,12 @@ import java.util.*;
 import java.io.*;
 public class BOJ_21608 {
     
-    static int N, friendsScore;
+    static int N, sum;
     static int[] dx = {-1, 1, 0, 0};
     static int[] dy = {0, 0, -1, 1};
+    static int[] students;
     static int[][] classroom;
-    static ArrayList<Friends> friends;
-    static ArrayList<int[]> maxFavoritePlace;
-    
-    static class Friends{
-        int myself;
-        int[] friendList;
-        
-        public Friends(int myself, int[] friendList){
-            this.myself = myself;
-            this.friendList = friendList;
-        }
-    }
+    static Map<Integer, Set<Integer>> friends;
     
     public static void main(String args[]) throws IOException {
       BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -25,89 +15,123 @@ public class BOJ_21608 {
       N = Integer.parseInt(br.readLine());
       
       classroom = new int[N+1][N+1];
-      friends = new ArrayList<>();
-      maxFavoritePlace = new ArrayList<>();
+      friends = new HashMap<>();
+      students = new int[N*N];
       
       for(int i=0; i<N*N; i++){
           StringTokenizer st = new StringTokenizer(br.readLine());
           
           int myself = Integer.parseInt(st.nextToken());
-          int friend1 = Integer.parseInt(st.nextToken());
-          int friend2 = Integer.parseInt(st.nextToken());
-          int friend3 = Integer.parseInt(st.nextToken());
-          int friend4 = Integer.parseInt(st.nextToken());
+
+          students[i] = myself;
           
-          friends.add(new Friends(myself, new int[] {friend1, friend2, friend3, friend4}));
+          friends.put(myself, new HashSet<>());
+          for(int j=0; j<4; j++){
+            friends.get(myself).add(Integer.parseInt(st.nextToken()));
+          }
       }
       
       placement();
 
+      System.out.println(sum);
+
     }
     
     public static void placement(){
-        for(Friends student : friends){
-            //1. 좋아하는 학생 체크
-            favoriteFriends(student.myself);
-            
-            //2. 주변 비어있는 칸 체크
-            if(maxFavoritePlace.size() > 1){
-                emptyPlace();
-            } else {
-                classroom[maxFavoritePlace.get(0)[0]][maxFavoritePlace.get(0)[1]] = student.myself;
-                continue;
+
+        for(int i=0; i<students.length; i++){
+            Seat seat = findSeat(students[i]);
+            classroom[seat.x][seat.y] = students[i];
+        }
+
+        for(int i=1; i<=N; i++){
+            for(int j=1; j<=N; j++){
+                int count = getStudentSum(i, j, classroom[i][j]);
+                if(count > 0){
+                    sum += (int) Math.pow(10, count-1);
+                }
             }
-            
-            //3. 행, 열 번호 작은 칸 체크
         }
         
     }
     
-    public static void favoriteFriends(int myself){
-        boolean[][] visited = new boolean[N+1][N+1];
-        int[][] friendsScoreMap = new int[N+1][N+1];
-        
+    public static Seat findSeat(int student){
+        Seat seat = null;
+        for(int i=1; i<=N; i++){
+            for(int j=1; j<=N; j++){
+                if(classroom[i][j] > 0) continue;
+
+                Seat cur = new Seat(i, j, getStudentSum(i, j, student), getEmptySum(i, j));
+
+                if(seat == null){
+                    seat = cur;
+                    continue;
+                }
+
+                if(seat.compareTo(cur) > 0){
+                    seat = cur;
+                }
+            }
+        }
+        return seat;
+    }
+    
+    public static int getStudentSum(int x , int y, int student){
         int count = 0;
-        for(int i=1; i<=N; i++){
-            for(int j=1; j<=N; j++){
-                if(classroom[i][j] == 0){
-                    count = friendsCheck(friends.get(i), i, j, visited);
-                }
-                friendsScoreMap[i][j] = count;
-                friendsScore = Math.max(friendsScore, count);
-            }
-        }
-        
-        for(int i=1; i<=N; i++){
-            for(int j=1; j<=N; j++){
-                if(friendsScoreMap[i][j] == friendsScore) {
-                    maxFavoritePlace.add(new int[] {i, j});
-                }
-            }
-        }
-    }
-    
-    public static int friendsCheck(Friends friends , int i, int j, boolean[][] visited){
-        int tmpCount = 0;
-        for(int d=0; d<4; d++){
-            int nx = i + dx[d];
-            int ny = j + dy[d];
-            
+        for(int i=0; i<4; i++){
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
             if(nx >= 1 && nx <= N && ny >= 1 && ny <= N){
-                if(!visited[nx][ny]){
-                    for(int n=0; n<4; n++){
-                        if(classroom[nx][ny] == friends.friendList[n]){
-                            tmpCount++;
-                        }
-                    }
-                    visited[nx][ny] = true;
+                if(friends.get(student).contains(classroom[nx][ny])){
+                    count++;
                 }
             }
         }
-        
-        return tmpCount;
+        return count;
     }
 
-    public static void emptyPlace(){
-        
+    public static int getEmptySum(int x, int y){
+        int count = 0;
+        for(int i=0; i<4; i++){
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+
+            if(nx >= 1 && nx <= N && ny >= 1 && ny <= N){
+                if(classroom[nx][ny] == 0){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    static class Seat implements Comparable<Seat>{
+        int x, y, studentSum, emptySum;
+
+        public Seat(int x, int y, int studentSum, int emptySum){
+            this.x = x;
+            this.y = y;
+            this.studentSum = studentSum;
+            this.emptySum = emptySum;
+        }
+
+        @Override
+        public int compareTo(Seat o) {
+
+            if(studentSum != o.studentSum){
+                return o.studentSum - studentSum;
+            }
+
+            if(emptySum != o.emptySum){
+                return o.emptySum - emptySum;
+            }
+
+            if(x != o.x){
+                return x - o.x;
+            }
+
+            return y - o.y;
+        }
     }
 }
