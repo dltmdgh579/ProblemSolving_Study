@@ -10,7 +10,7 @@ class Solution {
         int index = 27;
         
         for(int i=0; i<26; i++){
-            map.put(String.valueOf((char) ('A' + i)), i+1);
+            map.put(String.valueOf((char) ('A' + i)), i+1); 
         }
         
         for(int i=0; i<msg.length(); i++){
