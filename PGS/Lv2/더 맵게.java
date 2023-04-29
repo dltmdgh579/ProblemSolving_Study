@@ -1,7 +1,7 @@
 import java.util.*;
 class Solution {
     public int solution(int[] scoville, int K) {
-        int answer = 0; 
+        int answer = 0;  
         
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         
