@@ -11,7 +11,7 @@ class Solution {
         bfs(maps, visited);
         
         if(answer == Integer.MAX_VALUE) answer = -1;
-        return answer; 
+        return answer;  
     }
     
     public void bfs(int[][] maps, boolean[][] visited){
