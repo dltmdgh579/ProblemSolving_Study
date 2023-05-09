@@ -10,7 +10,7 @@ class Solution {
         
         bfs(maps, visited);
         
-        if(answer == Integer.MAX_VALUE) answer = -1;
+        if(answer == Integer.MAX_VALUE) answer = -1; 
         return answer;  
     }
     
