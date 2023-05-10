@@ -8,7 +8,7 @@ class Solution {
         
         boolean[][] visited = new boolean[maps.length][maps[0].length];
         
-        bfs(maps, visited);
+        bfs(maps, visited); 
         
         if(answer == Integer.MAX_VALUE) answer = -1; 
         return answer;  
