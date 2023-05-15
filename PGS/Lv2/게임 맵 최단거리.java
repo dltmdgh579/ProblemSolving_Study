@@ -6,7 +6,7 @@ class Solution {
     
     public int solution(int[][] maps) {
         
-        boolean[][] visited = new boolean[maps.length][maps[0].length];
+        boolean[][] visited = new boolean[maps.length][maps[0].length]; 
         
         bfs(maps, visited); 
         
