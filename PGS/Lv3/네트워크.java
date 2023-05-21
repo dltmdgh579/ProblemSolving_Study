@@ -17,7 +17,7 @@ class Solution {
     }
     
     public void dfs(int[][] computers, int i, boolean[] visited){
-        visited[i] = true;
+        visited[i] = true; 
         
         for(int j=0; j<computers[i].length; j++){
             if(i == j) continue;
