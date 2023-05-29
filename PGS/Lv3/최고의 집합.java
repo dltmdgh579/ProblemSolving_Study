@@ -12,7 +12,7 @@ class Solution {
         
         if(mod != 0){
             for(int i=0; i<mod; i++){
-                answer[n-i-1] += 1;
+                answer[n-i-1] += 1; 
             }
         }
         
