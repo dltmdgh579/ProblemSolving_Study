@@ -19,7 +19,7 @@ class Solution {
                     sum -= q.poll();
                 } else {
                     if(sum + truck <= weight){
-                        q.add(truck);
+                        q.add(truck); 
                         sum += truck;
                         time++;
                         break;
