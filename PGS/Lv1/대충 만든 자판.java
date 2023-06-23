@@ -18,7 +18,7 @@ class Solution {
             for(int j=0; j<targets[i].length(); j++){
                 if(minAlpha[targets[i].charAt(j) - 'A'] == Integer.MAX_VALUE) {
                     answer[i] = -1;
-                    break;
+                    break; 
                 }
                 answer[i] += minAlpha[targets[i].charAt(j) - 'A'];
             }
