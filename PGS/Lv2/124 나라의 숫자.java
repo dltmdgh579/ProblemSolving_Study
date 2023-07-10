@@ -7,7 +7,7 @@ class Solution {
         while(n > 0){
             int tmp = n%3;
             n /= 3;
-            if(tmp == 0){
+            if(tmp == 0){ 
                 n--;
             }
             answer.insert(0, digit[tmp]);
